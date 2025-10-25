@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'dart:math';
 
 import 'package:flutter/material.dart' hide Card;
@@ -217,7 +218,7 @@ class UserHeader extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 21,
-            backgroundImage: user.avatarUrl != null
+            backgroundImage: user.avatarUrl != null && Platform.isIOS
                 ? NetworkImage(user.avatarUrl!)
                 : Image.asset('assets/images/user.png').image,
             backgroundColor: Colors.transparent,
@@ -226,6 +227,7 @@ class UserHeader extends StatelessWidget {
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
                   user.fullName,
