@@ -1,6 +1,6 @@
 name: test_dayly
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
@@ -11,25 +11,27 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_svg: ^2.2.1
-  get: ^4.7.2
-  intl: ^0.20.2
-  modal_bottom_sheet: ^3.0.0
 
+  ui_kit:
+    path: ./packages/ui_kit
+  presentation:
+    path: ./packages/presentation
+  domain:
+    path: ./packages/domain
+  data:
+    path: ./packages/data
+  assets:
+    path: ./packages/assets
+  core:
+    path: ./packages/core
+  get_it: ^8.2.0
+  flutter_bloc: ^9.1.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^5.0.0
+  build_runner: ^2.10.1
+  freezed: ^3.2.3
 
 flutter:
   uses-material-design: true
-  assets:
-    - assets/images/
-    - assets/images/icons/
-    - assets/fonts/
-  fonts:
-    - family: Inter
-      fonts:
-        - asset: assets/fonts/Inter-Regular.ttf
-        - asset: assets/fonts/Inter-Bold.ttf
-          weight: 700

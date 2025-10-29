@@ -1,0 +1,19 @@
+name: ui_kit
+description: UI Kit package
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  assets: 
+    path: ../assets
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

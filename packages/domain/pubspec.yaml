@@ -1,0 +1,23 @@
+name: domain
+description: UI Kit package
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  data: 
+    path: ../data
+  core:  
+    path: ../core
+  equatable: ^2.0.7
+  json_annotation: ^4.9.0
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true
