@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:core/core.dart';
+import 'package:core_api/core_api.dart';
 import 'package:flutter/material.dart' hide Card;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/configs/calendar_config.dart';
@@ -10,7 +10,6 @@ import 'package:presentation/src/screens/home/blocs/users/users_cubit.dart';
 import 'package:presentation/src/screens/home/blocs/users/users_state.dart';
 import 'package:presentation/src/screens/home/widgets/current_time_indicator.dart';
 import 'package:presentation/src/screens/home/widgets/timeline/timeline_grid.dart';
-import 'package:presentation/src/screens/home/widgets/timeline/timeline_grid_dividers.dart';
 import 'package:presentation/src/screens/home/widgets/timeline/timeline_hour.dart';
 import 'package:presentation/src/screens/home/widgets/user_header.dart';
 import 'package:ui_kit/ui_kit.dart';
@@ -31,7 +30,7 @@ class _DayTimeLineState extends State<DayTimeLine> with SingleTickerProviderStat
   @override
   void initState() {
     scrollController = ScrollController();
-    pageController = PageController(viewportFraction: 0.9);
+    pageController = PageController();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => Future.delayed(const Duration(milliseconds: 400), _scrollToCurrentTime),
@@ -123,4 +122,6 @@ class _DayTimeLineState extends State<DayTimeLine> with SingleTickerProviderStat
       ),
     );
   }
+
+
 }

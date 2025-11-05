@@ -7,9 +7,9 @@ import 'package:presentation/presentation.dart';
 final getIt = GetIt.instance;
 
 Future<void> registerGetIt() async {
-  CoreDiModule().init();
-  PresentationDiModule().init();
-  DomainDiModule().init();
   DataDiModule().init();
+  DomainDiModule().init();
+  PresentationDiModule().init();
+  CoreDiModule().init();
   await getIt.allReady();
 }

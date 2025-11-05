@@ -1,5 +1,5 @@
 name: domain
-description: UI Kit package
+description: Нельзя чтобы зависил от других пакетов приложения и от него зависели
 version: 0.1.0+1
 publish_to: none
 
@@ -9,10 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  data: 
-    path: ../data
-  core:  
-    path: ../core
+  get_it: ^8.2.0
+  data_api: 
+    path: ../data/data_api
+  core_api:  
+    path: ../core/core_api
+  domain_api:
+    path: ./domain_api
   equatable: ^2.0.7
   json_annotation: ^4.9.0
 dev_dependencies:

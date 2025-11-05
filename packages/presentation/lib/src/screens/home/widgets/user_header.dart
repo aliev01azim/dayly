@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import 'package:assets/gen/assets.gen.dart';
-import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:flutter/material.dart';
 import 'package:presentation/src/configs/calendar_config.dart';
 import 'package:ui_kit/ui_kit.dart';

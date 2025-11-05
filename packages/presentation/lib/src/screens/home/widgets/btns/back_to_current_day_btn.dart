@@ -1,4 +1,4 @@
-import 'package:core/core.dart';
+import 'package:core_api/core_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/screens/home/blocs/calendar/calendar_cubit.dart';
@@ -55,7 +55,7 @@ class _BackButton extends StatelessWidget {
                 height: 44,
                 width: 44,
                 decoration: BoxDecoration(
-                  color: MainPalette.blue,
+                  color: MainPalette.main,
                   borderRadius: BorderRadius.circular(12),
                   boxShadow: [
                     BoxShadow(offset: const Offset(5, 12), color: MainPalette.black.withOpacity(0.04), blurRadius: 20),

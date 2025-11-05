@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:flutter/material.dart';
 import 'package:ui_kit/ui_kit.dart';
 
@@ -19,9 +19,9 @@ extension SessionStatusExtension on SessionStatus {
       case SessionStatus.confirmed:
         return MainPalette.red; // подтверждено
       case SessionStatus.attended:
-        return MainPalette.blue; // пришел
+        return MainPalette.main; // пришел
       case SessionStatus.missed:
-        return MainPalette.blue; // не пришел
+        return MainPalette.main; // не пришел
     }
   }
 

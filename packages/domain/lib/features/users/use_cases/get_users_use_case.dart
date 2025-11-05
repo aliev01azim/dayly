@@ -1,10 +1,8 @@
 import 'dart:async';
 
-import 'package:core/core.dart';
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:data_api/data_api.dart';
+import 'package:domain_api/domain_api.dart';
 
-abstract class GetUsersUseCase extends UseCase<List<User>, EmptyUseCaseParams> {}
 
 class GetUsersUseCaseImpl extends GetUsersUseCase {
   GetUsersUseCaseImpl({required this.usersRepository});

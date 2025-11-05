@@ -1,0 +1,21 @@
+name: domain_api
+description: Нельзя чтобы зависил от других пакетов приложения и от него зависели
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  data_api: 
+    path: ../../data/data_api
+  core_api:  
+    path: ../../core/core_api
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

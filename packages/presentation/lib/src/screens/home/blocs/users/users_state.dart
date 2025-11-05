@@ -1,4 +1,4 @@
-import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'users_state.freezed.dart';

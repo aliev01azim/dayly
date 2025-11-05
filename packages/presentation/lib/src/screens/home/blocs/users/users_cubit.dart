@@ -1,5 +1,5 @@
-import 'package:core/core.dart';
-import 'package:domain/domain.dart';
+import 'package:core_api/core_api.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/screens/home/blocs/users/users_state.dart';
 

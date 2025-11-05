@@ -1,7 +1,10 @@
-import 'package:core/src/di/di_helper/base_di_module.dart';
-import 'package:core/src/network/client/http_client.dart';
+import 'dart:developer';
+
+import 'package:core/core.dart';
+import 'package:core_api/core_api.dart';
+import 'package:dio/dio.dart' show LogInterceptor;
+import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 final getIt = GetIt.instance;
 
@@ -10,7 +13,6 @@ class CoreDiModule extends BaseDiModule {
   void initModule(GetIt getIt) {
     _registerInterceptors(getIt);
     _registerHttpClient(getIt);
-    _registerAsyncServices();
     /* Напрмер
     _registerLocalizations(getIt);
     _registerEnvironmentConfig(getIt);
@@ -20,22 +22,22 @@ class CoreDiModule extends BaseDiModule {
   }
 
   void _registerInterceptors(GetIt getIt) {
-    ///регистрируем интерсепторы через registerLazySingleton
-    /*getIt
-      ..registerLazySingleton<ConnectionInterceptor>(() => ConnectionInterceptor())
-      ..registerLazySingleton<TokenInterceptor>(() => TokenInterceptor())
-      ..registerLazySingleton<DeviceInfoInterceptor>(() => DeviceInfoInterceptor())
-      ..registerLazySingleton<LogOutInterceptor>(() => LogOutInterceptor())
-      ..registerLazySingleton<ErrorHandlerInterceptor>(() => ErrorHandlerInterceptor());*/
+    getIt.registerLazySingleton<TokenInterceptor>(() => TokenInterceptor(getAuthTokenUseCase: getIt()));
+    // ..registerLazySingleton<ConnectionInterceptor>(() => ConnectionInterceptor())
+    // ..registerLazySingleton<DeviceInfoInterceptor>(() => DeviceInfoInterceptor())
+    // ..registerLazySingleton<LogOutInterceptor>(() => LogOutInterceptor())
+    // ..registerLazySingleton<ErrorHandlerInterceptor>(() => ErrorHandlerInterceptor());
   }
 
   void _registerHttpClient(GetIt getIt) {
     getIt.registerLazySingleton<HttpClient>(() {
       final client = HttpClient(
-        baseUrl: 'https://example.com/api/',
+        baseUrl: 'https://dev.alika.ai/',
         interceptors: [
-          /*getIt<ConnectionInterceptor>(),
           getIt<TokenInterceptor>(),
+          if (!kReleaseMode) LogInterceptor(requestBody: true, responseBody: true, logPrint: (m) => log(m.toString())),
+
+          /*getIt<ConnectionInterceptor>(),
           getIt<DeviceInfoInterceptor>(),
           getIt<LogOutInterceptor>(),
           getIt<ErrorHandlerInterceptor>(),*/
@@ -56,26 +58,5 @@ class CoreDiModule extends BaseDiModule {
 
       return client;
     });
-  }
-
-  Future _registerAsyncServices() async {
-    //root independent: firebase app, Hive
-    await Future.wait([
-      // Hive.initFlutter(),
-      // Firebase.initializeApp(),
-    ]);
-
-    // Adapters
-    /*Hive
-    ..registerAdapter(UserAdapter())
-    ..registerAdapter(UserSessionAdapter());*/
-
-    //hive dependent: boxes initialization
-    /*await Future.wait([
-    Hive.openBox<User>(HiveBoxes.userBox),
-    Hive.openBox<UserSession>(HiveBoxes.userSessionBox),
-  ]);*/
-
-    await initializeDateFormatting('ru_RU');
   }
 }

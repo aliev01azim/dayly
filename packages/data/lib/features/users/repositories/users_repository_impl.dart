@@ -1,5 +1,5 @@
-import 'package:data/data.dart';
-import 'package:domain/domain.dart';
+import 'package:data_api/data_api.dart';
+import 'package:domain_api/domain_api.dart';
 
 class UsersRepositoryImpl implements UsersRepository {
   const UsersRepositoryImpl({required RemoteUsersDataSource remoteUsersDataSource})

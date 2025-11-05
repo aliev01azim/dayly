@@ -1,0 +1,20 @@
+name: core_api
+description: публичные API для других пакетов
+version: 0.1.0+1
+publish_to: none
+
+environment:
+  sdk: ^3.8.1
+
+dependencies:
+  flutter:
+    sdk: flutter
+  dio: ^5.9.0
+  get_it: ^8.2.0
+  intl: ^0.20.2
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  uses-material-design: true

@@ -1,5 +1,5 @@
 name: core
-description: UI Kit package
+description: Нельзя чтобы зависил от других пакетов приложения,от него же могут зависить другие пакеты data и presentation
 version: 0.1.0+1
 publish_to: none
 
@@ -7,12 +7,16 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
-  dio: ^5.9.0
   flutter:
     sdk: flutter
   get_it: ^8.2.0
-  intl: ^0.20.2
-
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  core_api: 
+    path: ./core_api
+  domain_api: 
+    path: ../domain/domain_api
+  dio: ^5.9.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

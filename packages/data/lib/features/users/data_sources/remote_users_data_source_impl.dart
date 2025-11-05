@@ -1,7 +1,6 @@
-import 'package:core/core.dart';
-import 'package:data/data.dart';
-import 'package:data/features/users/data_sources/remote_users_data_source.dart';
-import 'package:domain/domain.dart';
+import 'package:core_api/core_api.dart';
+import 'package:data_api/data_api.dart';
+import 'package:domain_api/domain_api.dart';
 
 class RemoteUsersDataSourceImpl implements RemoteUsersDataSource {
   const RemoteUsersDataSourceImpl({

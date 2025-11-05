@@ -1,5 +1,5 @@
 name: data
-description: UI Kit package
+description: Можно зависеть от core,domain. Нельзя зависить от presentation и ui_kit
 version: 0.1.0+1
 publish_to: none
 
@@ -7,16 +7,20 @@ environment:
   sdk: ^3.8.1
 
 dependencies:
-  dio: ^5.9.0
   flutter:
     sdk: flutter
   json_annotation: ^4.9.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  get_it: ^8.2.0
 
-  core:
-    path: ../core
-  domain:  
-    path: ../domain
-
+  core_api:
+    path: ../core/core_api
+  data_api:
+    path: ./data_api
+  domain_api:
+    path: ../domain/domain_api
+  
 dev_dependencies:
   flutter_test:
     sdk: flutter

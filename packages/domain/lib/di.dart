@@ -1,16 +1,16 @@
-import 'package:core/core.dart';
-import 'package:data/data.dart';
+import 'package:core_api/core_api.dart';
 import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:get_it/get_it.dart';
-
-final getIt = GetIt.instance;
 
 class DomainDiModule extends BaseDiModule {
   @override
   void initModule(GetIt getIt) {
-    getIt.registerLazySingleton<GetUsersUseCase>(
-      () => GetUsersUseCaseImpl(usersRepository: getIt<UsersRepository>()),
-    );
+    getIt
+      ..registerLazySingleton<GetUsersUseCase>(() => GetUsersUseCaseImpl(usersRepository: getIt()))
+      ..registerLazySingleton<GetAuthTokenUseCase>(() => GetAuthTokenUseCaseImpl(storageRepository: getIt()))
+      ..registerLazySingleton<SaveAuthTokenUseCase>(() => SaveAuthTokenUseCaseImpl(storageRepository: getIt()))
+      ..registerLazySingleton<ChallengeUseCase>(() => ChallengeUseCaseImpl(authByPhoneRepository: getIt()))
+      ..registerLazySingleton<VerifyUseCase>(() => VerifyUseCaseImpl(authByPhoneRepository: getIt()));
   }
-
 }

@@ -1,5 +1,5 @@
 import 'package:assets/gen/assets.gen.dart';
-import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:presentation/src/extensions/session_extensions.dart';

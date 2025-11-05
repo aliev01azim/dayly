@@ -1,10 +1,9 @@
-import 'package:core/core.dart';
-import 'package:domain/domain.dart';
+import 'package:domain_api/domain_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/extensions/session_extensions.dart';
 import 'package:presentation/src/screens/home/blocs/users/users_cubit.dart';
-import 'package:presentation/src/screens/home/blocs/users/users_state.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class SessionCreate extends StatefulWidget {
   const SessionCreate({super.key, required this.userModel, required this.startTime});

@@ -15,7 +15,7 @@ class SplashScreen extends StatelessWidget {
       listener: (context, state) {
         state.mapOrNull(
           authorized: (_) => context.go(AppRoutes.home),
-          unauthorized: (_) => print('Навигация на экран авторизации'),
+          unauthorized: (_) => context.go(AppRoutes.authPhone),
           needUpdate: (_) => print('Навигация на экран обновления приложения'),
           error: (_) => print('Можно показать диалог с ошибкой или что-то еще'),
         );
