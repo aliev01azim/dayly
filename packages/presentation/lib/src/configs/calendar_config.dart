@@ -1,6 +1,6 @@
 class CalendarConfig {
   /// 1 час = 96 пикселей
-  static const double hourSectorHeight = 96;
+  static const double hourSectorHeight = 70;
 
   /// 4 деления в час
   static const int dividersCount = 4;

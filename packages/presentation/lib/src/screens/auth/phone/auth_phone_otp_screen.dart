@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:domain_api/domain_api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,13 +21,43 @@ class AuthPhoneOtpScreen extends StatefulWidget {
 
 class _AuthPhoneOtpScreenState extends State<AuthPhoneOtpScreen> {
   final pinTextController = TextEditingController();
+  late final ValueNotifier<int> secondsLeft;
+  Timer? _timer;
 
   bool get _isValidCode => pinTextController.text.length == 4;
 
   @override
+  void initState() {
+    super.initState();
+    secondsLeft = ValueNotifier<int>(0);
+    _startTimer();
+  }
+
+  @override
   void dispose() {
+    _timer?.cancel();
+    secondsLeft.dispose();
     pinTextController.dispose();
     super.dispose();
+  }
+
+  void _startTimer() {
+    secondsLeft.value = 30;
+    _timer?.cancel();
+    _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+      if (secondsLeft.value == 1) {
+        timer.cancel();
+        secondsLeft.value = 0;
+      } else {
+        secondsLeft.value -= 1;
+      }
+    });
+  }
+
+  void _resendCode() async {
+    _startTimer();
+    final cubit = context.read<AuthPhoneCubit>();
+    await cubit.challenge(widget.challenge.phone);
   }
 
   @override
@@ -43,8 +75,8 @@ class _AuthPhoneOtpScreenState extends State<AuthPhoneOtpScreen> {
               builder: (context, state) {
                 return CodeTextField(
                   controller: pinTextController,
-                  enabled: state.maybeMap(verifying: (value) => true, orElse: () => false),
-                  hasError: state.maybeMap(verified: (value) => value.error != null, orElse: () => false),
+                  enabled: state.maybeMap(verifying: (_) => true, orElse: () => false),
+                  hasError: state.maybeMap(verified: (v) => v.error != null, orElse: () => false),
                   onCodeCompleted: (code) =>
                       context.read<AuthPhoneCubit>().verify(challengeId: widget.challenge.id, code: code),
                   onCodeChanged: (_) => setState(() {}),
@@ -53,22 +85,26 @@ class _AuthPhoneOtpScreenState extends State<AuthPhoneOtpScreen> {
             ),
             const SizedBox(height: 16),
             BlocConsumer<AuthPhoneCubit, AuthPhoneState>(
+              listener: (context, state) {
+                if (state.maybeMap(verified: (v) => v.authToken != null, orElse: () => false)) {
+                  context.go(AppRoutes.home);
+                }
+              },
               builder: (context, state) {
                 String? error;
                 return Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     if (state.maybeMap(
-                      verified: (value) {
-                        error = value.error;
-                        return value.error != null;
+                      verified: (v) {
+                        error = v.error;
+                        return v.error != null;
                       },
                       orElse: () => false,
                     )) ...[
                       Text(error!, style: AppTextStyles.p(color: MainPalette.red)),
                       const SizedBox(height: 16),
                     ],
-
                     ElevatedButtonCustom(
                       text: 'Далее',
                       onTap: () => context.read<AuthPhoneCubit>().verify(
@@ -76,15 +112,31 @@ class _AuthPhoneOtpScreenState extends State<AuthPhoneOtpScreen> {
                         code: pinTextController.text,
                       ),
                       enabled: _isValidCode,
-                      isLoading: state.maybeMap(verifying: (value) => true, orElse: () => false),
+                      isLoading: state.maybeMap(verifying: (_) => true, orElse: () => false),
+                    ),
+                    const SizedBox(height: 24),
+                    Center(
+                      child: ValueListenableBuilder<int>(
+                        valueListenable: secondsLeft,
+                        builder: (_, value, __) {
+                          if (value == 0) {
+                            return GestureDetector(
+                              onTap: _resendCode,
+                              child: Text(
+                                'Отправить код повторно',
+                                style: AppTextStyles.p(color: MainPalette.textBaseSecondary).copyWith(decoration: TextDecoration.underline),
+                              ),
+                            );
+                          }
+                          return Text(
+                            'Отправить код повторно через $value сек',
+                            style: AppTextStyles.p(color: MainPalette.textBaseSecondary),
+                          );
+                        },
+                      ),
                     ),
                   ],
                 );
-              },
-              listener: (context, state) {
-                if (state.maybeMap(verified: (value) => value.authToken != null, orElse: () => false)) {
-                  context.go(AppRoutes.home);
-                }
               },
             ),
             const SizedBox(height: 32),

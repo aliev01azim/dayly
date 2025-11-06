@@ -1,5 +1,7 @@
 // ignore_for_file: dead_code
 
+import 'dart:developer';
+
 import 'package:core_api/core_api.dart';
 import 'package:domain_api/domain_api.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,11 +21,11 @@ class SplashCubit extends Cubit<SplashState> {
     final tokensResult = await getAuthTokenUseCase.invoke(const EmptyUseCaseParams());
     tokensResult.fold(
       onFailure: (f) {
-        print(f.message);
+        log(f.message.toString());
         return hasValidToken = false;
       },
       onSuccess: (s) {
-        print(s?.toData());
+        log(s?.toData().toString()??'');
         return hasValidToken = s?.accessToken != null;
       },
     );
@@ -31,9 +33,6 @@ class SplashCubit extends Cubit<SplashState> {
     final isVersionOk = true;
 
     ///*await checkAppVersionUseCase()*/ true - ok, false - нужно обновить
-    print(hasValidToken);
-    print(hasValidToken);
-    print(hasValidToken);
     if (!isVersionOk) {
       emit(const SplashState.needUpdate());
     } else if (hasValidToken) {

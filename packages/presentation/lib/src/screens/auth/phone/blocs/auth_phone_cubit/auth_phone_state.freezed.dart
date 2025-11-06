@@ -55,7 +55,7 @@ extension AuthPhoneStatePatterns on AuthPhoneState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Challenging value)?  challenging,TResult Function( _Challenged value)?  challenged,TResult Function( _Verifying value)?  verifying,TResult Function( _Verified value)?  verified,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Challenging value)?  challenging,TResult Function( _Challenged value)?  challenged,TResult Function( _Verifying value)?  verifying,TResult Function( _Verified value)?  verified,TResult Function( _Resending value)?  resending,TResult Function( _Resent value)?  resent,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -63,7 +63,9 @@ return initial(_that);case _Challenging() when challenging != null:
 return challenging(_that);case _Challenged() when challenged != null:
 return challenged(_that);case _Verifying() when verifying != null:
 return verifying(_that);case _Verified() when verified != null:
-return verified(_that);case _:
+return verified(_that);case _Resending() when resending != null:
+return resending(_that);case _Resent() when resent != null:
+return resent(_that);case _:
   return orElse();
 
 }
@@ -81,7 +83,7 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Challenging value)  challenging,required TResult Function( _Challenged value)  challenged,required TResult Function( _Verifying value)  verifying,required TResult Function( _Verified value)  verified,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Challenging value)  challenging,required TResult Function( _Challenged value)  challenged,required TResult Function( _Verifying value)  verifying,required TResult Function( _Verified value)  verified,required TResult Function( _Resending value)  resending,required TResult Function( _Resent value)  resent,}){
 final _that = this;
 switch (_that) {
 case _Initial():
@@ -89,7 +91,9 @@ return initial(_that);case _Challenging():
 return challenging(_that);case _Challenged():
 return challenged(_that);case _Verifying():
 return verifying(_that);case _Verified():
-return verified(_that);case _:
+return verified(_that);case _Resending():
+return resending(_that);case _Resent():
+return resent(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -106,7 +110,7 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Challenging value)?  challenging,TResult? Function( _Challenged value)?  challenged,TResult? Function( _Verifying value)?  verifying,TResult? Function( _Verified value)?  verified,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Challenging value)?  challenging,TResult? Function( _Challenged value)?  challenged,TResult? Function( _Verifying value)?  verifying,TResult? Function( _Verified value)?  verified,TResult? Function( _Resending value)?  resending,TResult? Function( _Resent value)?  resent,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
@@ -114,7 +118,9 @@ return initial(_that);case _Challenging() when challenging != null:
 return challenging(_that);case _Challenged() when challenged != null:
 return challenged(_that);case _Verifying() when verifying != null:
 return verifying(_that);case _Verified() when verified != null:
-return verified(_that);case _:
+return verified(_that);case _Resending() when resending != null:
+return resending(_that);case _Resent() when resent != null:
+return resent(_that);case _:
   return null;
 
 }
@@ -131,14 +137,16 @@ return verified(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  challenging,TResult Function( String? error,  Challenge? challenge)?  challenged,TResult Function()?  verifying,TResult Function( String? error,  AuthToken? authToken)?  verified,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  challenging,TResult Function( String? error,  Challenge? challenge)?  challenged,TResult Function()?  verifying,TResult Function( String? error,  AuthToken? authToken)?  verified,TResult Function()?  resending,TResult Function( String? error,  Challenge? challenge)?  resent,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Challenging() when challenging != null:
 return challenging();case _Challenged() when challenged != null:
 return challenged(_that.error,_that.challenge);case _Verifying() when verifying != null:
 return verifying();case _Verified() when verified != null:
-return verified(_that.error,_that.authToken);case _:
+return verified(_that.error,_that.authToken);case _Resending() when resending != null:
+return resending();case _Resent() when resent != null:
+return resent(_that.error,_that.challenge);case _:
   return orElse();
 
 }
@@ -156,14 +164,16 @@ return verified(_that.error,_that.authToken);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  challenging,required TResult Function( String? error,  Challenge? challenge)  challenged,required TResult Function()  verifying,required TResult Function( String? error,  AuthToken? authToken)  verified,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  challenging,required TResult Function( String? error,  Challenge? challenge)  challenged,required TResult Function()  verifying,required TResult Function( String? error,  AuthToken? authToken)  verified,required TResult Function()  resending,required TResult Function( String? error,  Challenge? challenge)  resent,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _Challenging():
 return challenging();case _Challenged():
 return challenged(_that.error,_that.challenge);case _Verifying():
 return verifying();case _Verified():
-return verified(_that.error,_that.authToken);case _:
+return verified(_that.error,_that.authToken);case _Resending():
+return resending();case _Resent():
+return resent(_that.error,_that.challenge);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -180,14 +190,16 @@ return verified(_that.error,_that.authToken);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  challenging,TResult? Function( String? error,  Challenge? challenge)?  challenged,TResult? Function()?  verifying,TResult? Function( String? error,  AuthToken? authToken)?  verified,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  challenging,TResult? Function( String? error,  Challenge? challenge)?  challenged,TResult? Function()?  verifying,TResult? Function( String? error,  AuthToken? authToken)?  verified,TResult? Function()?  resending,TResult? Function( String? error,  Challenge? challenge)?  resent,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _Challenging() when challenging != null:
 return challenging();case _Challenged() when challenged != null:
 return challenged(_that.error,_that.challenge);case _Verifying() when verifying != null:
 return verifying();case _Verified() when verified != null:
-return verified(_that.error,_that.authToken);case _:
+return verified(_that.error,_that.authToken);case _Resending() when resending != null:
+return resending();case _Resent() when resent != null:
+return resent(_that.error,_that.challenge);case _:
   return null;
 
 }
@@ -421,6 +433,106 @@ class __$VerifiedCopyWithImpl<$Res>
 error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as String?,authToken: freezed == authToken ? _self.authToken : authToken // ignore: cast_nullable_to_non_nullable
 as AuthToken?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _Resending implements AuthPhoneState {
+  const _Resending();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Resending);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'AuthPhoneState.resending()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Resent implements AuthPhoneState {
+  const _Resent({required this.error, required this.challenge});
+  
+
+ final  String? error;
+ final  Challenge? challenge;
+
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$ResentCopyWith<_Resent> get copyWith => __$ResentCopyWithImpl<_Resent>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Resent&&(identical(other.error, error) || other.error == error)&&(identical(other.challenge, challenge) || other.challenge == challenge));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error,challenge);
+
+@override
+String toString() {
+  return 'AuthPhoneState.resent(error: $error, challenge: $challenge)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$ResentCopyWith<$Res> implements $AuthPhoneStateCopyWith<$Res> {
+  factory _$ResentCopyWith(_Resent value, $Res Function(_Resent) _then) = __$ResentCopyWithImpl;
+@useResult
+$Res call({
+ String? error, Challenge? challenge
+});
+
+
+
+
+}
+/// @nodoc
+class __$ResentCopyWithImpl<$Res>
+    implements _$ResentCopyWith<$Res> {
+  __$ResentCopyWithImpl(this._self, this._then);
+
+  final _Resent _self;
+  final $Res Function(_Resent) _then;
+
+/// Create a copy of AuthPhoneState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = freezed,Object? challenge = freezed,}) {
+  return _then(_Resent(
+error: freezed == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as String?,challenge: freezed == challenge ? _self.challenge : challenge // ignore: cast_nullable_to_non_nullable
+as Challenge?,
   ));
 }
 

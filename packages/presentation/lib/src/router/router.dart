@@ -40,7 +40,7 @@ final appRouter = GoRouter(
         child: const Home(),
       ),
     ),
-    //login
+    //phone auth
     GoRoute(
       parentNavigatorKey: navigatorKey,
       path: AppRoutes.authPhone,

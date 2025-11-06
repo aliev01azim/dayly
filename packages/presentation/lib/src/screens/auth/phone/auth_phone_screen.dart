@@ -89,6 +89,7 @@ class _AuthPhoneScreenState extends State<AuthPhoneScreen> {
               },
             ),
             const SizedBox(height: 32),
+            const SizedBox(height: 48),
           ],
         ),
       ),

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:presentation/src/configs/calendar_config.dart';
 import 'package:presentation/src/screens/home/blocs/calendar/calendar_state.dart';
+import 'package:ui_kit/ui_kit.dart';
 
 class CalendarCubit extends Cubit<CalendarState> {
   CalendarCubit() : super(const CalendarState.initial()) {
@@ -39,7 +40,13 @@ class CalendarCubit extends Cubit<CalendarState> {
       },
     );
   }
-
+  void setSelectedDay(int index) {
+     state.mapOrNull(
+      loaded: (s) {
+        emit(s.copyWith(selectedDay: s.selectedDay?.getDaysOfMonth[index]));
+      },
+    );
+  }
   void jumpToCurrentDay() {
     final now = DateTime.now();
     state.mapOrNull(

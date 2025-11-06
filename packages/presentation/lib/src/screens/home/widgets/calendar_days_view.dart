@@ -19,7 +19,7 @@ class DayView extends StatelessWidget {
           _DaysListView(),
 
           Expanded(
-            child: Stack(children: [_DaysPageView(), _LoadingIndicator(), BackToCurrentDayButtons(), OpacityOverlay()]),
+            child: Stack(children: [DaysPageView(), _LoadingIndicator(), BackToCurrentDayButtons(), OpacityOverlay()]),
           ),
         ],
       ),
@@ -40,16 +40,6 @@ class _LoadingIndicator extends StatelessWidget {
     return const IgnorePointer(
       child: Align(child: CircularProgressIndicator(color: MainPalette.main)),
     );
-  }
-}
-
-class _DaysPageView extends StatelessWidget {
-  const _DaysPageView();
-
-  @override
-  Widget build(BuildContext context) {
-    final day = context.select<CalendarCubit, DateTime>((cubit) => cubit.state.selectedDay ?? DateTime.now());
-    return DayTimeLine(day);
   }
 }
 

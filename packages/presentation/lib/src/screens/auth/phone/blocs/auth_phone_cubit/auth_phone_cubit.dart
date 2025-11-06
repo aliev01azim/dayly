@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:domain_api/domain_api.dart';
 import 'package:presentation/src/screens/auth/phone/blocs/auth_phone_cubit/auth_phone_state.dart';
@@ -33,12 +35,23 @@ class AuthPhoneCubit extends Cubit<AuthPhoneState> {
         emit(AuthPhoneState.verified(error: exc.message, authToken: null));
       },
       onSuccess: (v) async {
-        print(v.toData());
-        print(v.toData());
-        print(v.toData());
+        log(v.toData().toString());
         await saveAuthTokenUseCase.invoke(v);
         emit(AuthPhoneState.verified(error: null, authToken: v));
       },
+    );
+  }
+
+  Future<void> resend(String phone) async {
+    emit(const AuthPhoneState.resending());
+
+    final result = await challengeUseCase.invoke(phone);
+
+    result.fold(
+      onFailure: (exc) {
+        emit(AuthPhoneState.resent(error: exc.message, challenge: null));
+      },
+      onSuccess: (v) => emit(AuthPhoneState.resent(error: null, challenge: v)),
     );
   }
 }
