@@ -23,9 +23,11 @@ class ElevatedButtonCustom extends StatelessWidget {
     return ElevatedButton(
       onPressed: enabled && !isLoading ? onTap : null,
       style: ElevatedButton.styleFrom(
+        padding: padding??const EdgeInsets.all(12),
         backgroundColor: MainPalette.main,
         overlayColor: MainPalette.focus,
-        minimumSize: const Size.fromHeight(52),
+        shadowColor: Colors.transparent,
+        minimumSize: const Size.fromHeight(48),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius ?? 16)),
       ),
       child: isLoading ? const LoadingIndicatorCustom() : Text(text, style: AppTextStyles.buttonText()),

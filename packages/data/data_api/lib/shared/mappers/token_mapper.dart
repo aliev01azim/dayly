@@ -7,7 +7,7 @@ extension TokenToDomainMapper on UserTokenDto {
       accessToken: tokens?.accessToken,
       refreshToken: tokens?.refreshToken,
       expiresIn: expiresIn,
-      tokenType: tokenType,
+      tokenType: tokens?.tokenType,
       mode: mode,
       success: success,
       message: message,

@@ -15,4 +15,10 @@ class AuthByPhoneRepositoryImpl implements AuthByPhoneRepository {
     final authTokenDto = await remoteAuthByPhoneDataSource.verify(challenge: challenge, code: code);
     return authTokenDto.toDomain();
   }
+
+  @override
+  Future<AuthToken> refreshToken({required String token}) async {
+    final authTokenDto = await remoteAuthByPhoneDataSource.refreshToken(token: token);
+    return authTokenDto.toDomain();
+  }
 }

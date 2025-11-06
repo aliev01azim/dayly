@@ -38,4 +38,21 @@ class RemoteAuthByPhoneDataSourceImpl implements RemoteAuthByPhoneDataSource {
 
     return UserTokenDto.fromJson(jsonData);
   }
+
+  @override
+  Future<UserTokenDto> refreshToken({required String token}) async {
+    final response = await _client.execute<Map<String, dynamic>>(
+      method: 'post',
+      url: 'main/public/phone-auth/refresh',
+      data: {'refreshToken': token},
+    );
+
+    final jsonData = response.data;
+
+    if (jsonData == null && jsonData is! Map<String, dynamic>) {
+      throw const AuthException(message: 'Ошибка');
+    }
+
+    return UserTokenDto.fromJson(jsonData);
+  }
 }

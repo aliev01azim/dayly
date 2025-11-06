@@ -22,7 +22,7 @@ class ServerException extends AppException {
       stackTrace: networkException.stackTrace,
       cause: networkException.cause,
       errorModel: networkException.errorModel,
-      serverErrorType: serverErrorType ?? _determineServerErrorType(networkException.statusCode),
+      serverErrorType: _determineServerErrorType(networkException.statusCode),
     );
   }
 

@@ -4,9 +4,8 @@ import 'package:domain_api/domain_api.dart';
 extension TokenToDataMapper on AuthToken {
   UserTokenDto toData() {
     return UserTokenDto(
-      tokens: TokensDto(accessToken: accessToken, refreshToken: refreshToken),
+      tokens: TokensDto(accessToken: accessToken, refreshToken: refreshToken,tokenType: tokenType),
       expiresIn: expiresIn,
-      tokenType: tokenType,
       mode: mode,
       success: success,
       message: message,

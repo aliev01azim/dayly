@@ -28,37 +28,37 @@ class ScaffoldCustomAuth extends StatelessWidget {
       },
       child: Scaffold(
         appBar: showOnlyBackButton ? null : appBar,
-        body: Column(
-          children: [
-            Stack(
-              alignment: Alignment.bottomLeft,
-              children: [
-                Image.asset(Assets.images.bgBanner.keyName, alignment: Alignment.topCenter),
-                Padding(
-                  padding: const EdgeInsets.only(left: 32),
-                  child: Image.asset(Assets.images.logo.keyName, height: 67),
-                ),
-                if (showOnlyBackButton)
-                  Positioned(
-                    left: 32,
-                    top: kToolbarHeight,
-                    child: InkWell(
-                      onTap: () => Navigator.of(context).pop(),
-                      child: Container(
-                        decoration: const BoxDecoration(shape: BoxShape.circle, color: MainPalette.main),
-                        width: 32,
-                        height: 32,
-                        child: Center(child: SvgPicture.asset(Assets.icons.arrowLeft.keyName)),
+        body: SingleChildScrollView(
+          child: Column(
+            children: [
+              Stack(
+                alignment: Alignment.bottomLeft,
+                children: [
+                  Image.asset(Assets.images.bgBanner.keyName, alignment: Alignment.topCenter),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 32),
+                    child: Image.asset(Assets.images.logo.keyName, height: 67),
+                  ),
+                  if (showOnlyBackButton)
+                    Positioned(
+                      left: 32,
+                      top: kToolbarHeight,
+                      child: InkWell(
+                        onTap: () => Navigator.of(context).pop(),
+                        child: Container(
+                          decoration: const BoxDecoration(shape: BoxShape.circle, color: MainPalette.main),
+                          width: 32,
+                          height: 32,
+                          child: Center(child: SvgPicture.asset(Assets.icons.arrowLeft.keyName)),
+                        ),
                       ),
                     ),
-                  ),
-              ],
-            ),
-
-            Expanded(
-              child: Padding(padding: padding ?? const EdgeInsets.symmetric(horizontal: 32), child: body),
-            ),
-          ],
+                ],
+              ),
+          
+             Padding(padding: padding ?? const EdgeInsets.symmetric(horizontal: 32), child: body)
+            ],
+          ),
         ),
       ),
     );

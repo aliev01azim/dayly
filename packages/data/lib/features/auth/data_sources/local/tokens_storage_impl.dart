@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:data_api/data_api.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -17,16 +16,12 @@ class TokensStorageImpl implements TokensStorage {
   UserTokenDto? getUserAuthToken() {
     // _hiveBox.clear();
 
-    final token = _hiveBox.get(_Keys.authToken.name) as Map<String,dynamic>?;
-    log(token?.toString()??'');
-    log(token?.runtimeType.toString()??'');
+    final token = _hiveBox.get(_Keys.authToken.name);
     return token != null ? UserTokenDto.fromJson(token) : null;
   }
 
   @override
   void setUserToken(UserTokenDto? token) {
-    log(token?.toJson().toString()??'');
-    log(token?.runtimeType.toString()??'');
     _hiveBox.put(_Keys.authToken.name, token?.toJson());
   }
 }

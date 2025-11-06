@@ -32,7 +32,7 @@ class CoreDiModule extends BaseDiModule {
   void _registerHttpClient(GetIt getIt) {
     getIt.registerLazySingleton<HttpClient>(() {
       final client = HttpClient(
-        baseUrl: 'https://dev.alika.ai/',
+        baseUrl: 'example',
         interceptors: [
           getIt<TokenInterceptor>(),
           if (!kReleaseMode) LogInterceptor(requestBody: true, responseBody: true, logPrint: (m) => log(m.toString())),
@@ -46,14 +46,12 @@ class CoreDiModule extends BaseDiModule {
 
       // Добавляем retry и refresh interceptors
       client.interceptors.addAll([
-        /*RetryInterceptor(
-          retryableExceptions: [
-            DioExceptionType.connectionTimeout,
-            DioExceptionType.sendTimeout,
-            DioExceptionType.receiveTimeout,
-          ],
+        RetryInterceptor(),
+        RefreshTokenInterceptor(
+          client: client,
+          authEventManager: getIt(),
+          getAuthTokenUseCase: getIt(),
         ),
-        RefreshTokenInterceptor(client: client),*/
       ]);
 
       return client;

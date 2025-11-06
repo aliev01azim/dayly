@@ -138,7 +138,7 @@ class DefaultTextField extends StatelessWidget {
             prefixIcon: prefixIcon,
             prefixIconConstraints: prefixIconConstraints,
             hintStyle: AppTextStyles.inputText(color: MainPalette.textBaseTertiary),
-            contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 9),
+            contentPadding: contentPadding ?? const EdgeInsets.symmetric(vertical: 12),
             enabledBorder: OutlineInputBorder(
               borderSide: BorderSide(
                 color: validate || errorText == null ? MainPalette.borderActionNormal : MainPalette.red,

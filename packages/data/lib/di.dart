@@ -20,6 +20,8 @@ class DataDiModule extends BaseDiModule {
       ..registerLazySingleton<RemoteAuthByPhoneDataSource>(
         () => RemoteAuthByPhoneDataSourceImpl(client: getIt<HttpClient>()),
       )
-      ..registerLazySingleton<AuthByPhoneRepository>(() => AuthByPhoneRepositoryImpl(remoteAuthByPhoneDataSource: getIt()));
+      ..registerLazySingleton<AuthByPhoneRepository>(
+        () => AuthByPhoneRepositoryImpl(remoteAuthByPhoneDataSource: getIt()),
+      );
   }
 }

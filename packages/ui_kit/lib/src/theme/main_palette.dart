@@ -13,6 +13,7 @@ class MainPalette {
   static const black = Color(0xFF000000);
   static const borderBaseInverted = Color.fromRGBO(11, 12, 14, 1);
   static const textBasePrimary =  Color(0xFF141519);
+  static const textBaseSecondary =  Color.fromRGBO(15, 19, 36, 0.6);
   static const inputText =  Color(0xFF334155);
   static const textBaseTertiary =  Color(0x660D1126);
   static const iconBaseTertiary =  Color.fromRGBO(13, 17, 38, 0.4);

@@ -48,20 +48,32 @@ abstract class UseCase<T, P> extends BaseUseCase<T, P, AppException> {
       }
     }
 
-    return switch (statusCode) {
-      401 => AuthException(message: message, stackTrace: stackTrace, authErrorType: AuthErrorType.unauthorized),
-      403 => AuthException(message: message, stackTrace: stackTrace, authErrorType: AuthErrorType.unauthorized),
-      422 => ValidationException(
-        message: _extractValidationErrors(errorData)?['message']??message,
-        stackTrace: stackTrace,
-        validationErrors: _extractValidationErrors(errorData),
-      ),
-      >= 500 => _createServerException(
+    if (statusCode >= 500) {
+      final serverException = _createServerException(
         message: message,
         statusCode: statusCode,
         errorData: errorData,
         stackTrace: stackTrace,
         cause: dio,
+      );
+
+      // Возвращаем userFriendlyMessage вместо оригинального сообщения
+      return ServerException(
+        message: serverException.userFriendlyMessage,
+        statusCode: serverException.statusCode,
+        errorModel: serverException.errorModel,
+        stackTrace: stackTrace,
+        cause: dio,
+        serverErrorType: serverException.serverErrorType,
+      );
+    }
+    return switch (statusCode) {
+      401 => AuthException(message: message, stackTrace: stackTrace, authErrorType: AuthErrorType.unauthorized),
+      403 => AuthException(message: message, stackTrace: stackTrace, authErrorType: AuthErrorType.unauthorized),
+      422 => ValidationException(
+        message: _extractValidationErrors(errorData)?['message'] ?? message,
+        stackTrace: stackTrace,
+        validationErrors: _extractValidationErrors(errorData),
       ),
       _ => NetworkException(
         message: message,
